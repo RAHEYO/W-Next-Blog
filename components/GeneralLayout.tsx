@@ -1,8 +1,9 @@
 import { NextPage } from 'next';
 import { ReactNode } from 'react';
+import Link from 'next/link';
+import { IoCreateOutline } from 'react-icons/io5';
 
 import Navbar from './Navbar';
-import Spacebar from './Spacebar';
 
 type GeneralLayoutProps = {
     children: ReactNode
@@ -15,7 +16,9 @@ const GeneralLayout: NextPage<GeneralLayoutProps> = ({ children }) => {
 
         {children}
 
-        {/* Build the createPost floating button */}
+        <Link href='/create' className='fixed bottom-10 end-10 z-10 bg-action opacity-80 p-4 rounded-full hover:scale-110 transition'>
+            <IoCreateOutline color='white' size={30} />
+        </Link>
     </div>
     );
 }
