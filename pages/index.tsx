@@ -1,16 +1,16 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 
-import Navbar from '@/components/Navbar'
+import GeneralLayout from '@/components/GeneralLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Root() {
   return (
-    <div>
+    <GeneralLayout>
       {/* <Home /> */}
-      <Navbar />
-    </div>
+
+    </GeneralLayout>
   )
 }
 

@@ -21,7 +21,7 @@ const NavBarItem: FC<NavBarItemProps> = (props) => {
     return (
         <Link key={props.href} href={props.href} className='flex flex-row items-center border-b-2 border-secondary-dark dark:border-secondary-light p-3 mt-3 hover:scale-95 transition'>
             <props.icon size={25} />
-            { props.navOpen && ( <> <div className='w-2' /> <span>{props.title}</span> </> ) }
+            { props.navOpen && ( <span className='ml-2'>{props.title}</span> ) }
         </Link>
     );
 }
@@ -52,12 +52,10 @@ const Navbar: FC = (): JSX.Element => {
     useEffect(() => {
         const currentNavStorage = localStorage.getItem(VISIBILITY);
         
-        // If not the first-render = localStorage contains the current navOpen information
-        if (currentNavStorage) {
-            setNavOpen(JSON.parse(localStorage.getItem(VISIBILITY)!));
-        } else {
-            // is the first render, then set it true by default
+        // If it is the first-render
+        if (currentNavStorage == null) {
             localStorage.setItem(VISIBILITY, "true");
+            setNavOpen(JSON.parse(localStorage.getItem(VISIBILITY)!));
         }
 
         // Then update the UI ref accordingly
@@ -78,8 +76,8 @@ const Navbar: FC = (): JSX.Element => {
     }, [navOpen]);
 
     return (
-        <div className='p-3'>
-            <div className='flex flex-row w-[200px] items-center justify-between'>
+        <div className='h-screen sticky top-0 p-3'>
+            <div className='w-[200px] flex flex-row items-center justify-between'>
                 <button className='self-end' onClick={toggleNavbar}>
                     { navOpen? <HiMenuAlt1 size={30} /> : <HiMenuAlt2 size={30} />}
                 </button>
@@ -93,12 +91,12 @@ const Navbar: FC = (): JSX.Element => {
             
             <Spacebar className='h-10' />
 
-            <nav ref={navRef} className={`flex flex-col ${NAV_OPEN_WIDTH} h-screen`}>
+            <nav ref={navRef} className={`flex flex-col ${NAV_OPEN_WIDTH} transition-width overflow-hidden`}>
                 {
                 navItems.map((item) => {
                     return NavBarItem({...item, navOpen});
                 }) 
-            }
+                }
             </nav>
         </div>
     );
