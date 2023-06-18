@@ -46,17 +46,17 @@ const Toolbar: FC<ToolbarProps> = ({ editor }): JSX.Element | null => {
 
         { /* The row for text styles */ }
         <div className='flex-row space-x-3'>
-            <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <FaBold size={18}/>
+            <StyleButton disabled={false} onClick={() => editor.chain().focus().toggleBold().run()}>
+                <FaBold size={19}/>
             </StyleButton>
-            <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <FiItalic size={18}/>
+            <StyleButton disabled={false} onClick={() => editor.chain().focus().toggleItalic().run()}>
+                <FiItalic size={19}/>
             </StyleButton>
-            <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <LuUnderline size={18}/>
+            <StyleButton disabled={false} onClick={() => editor.chain().focus().toggleUnderline().run()}>
+                <LuUnderline size={19}/>
             </StyleButton>
-            <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <RiStrikethrough size={18}/>
+            <StyleButton disabled={false} onClick={() => editor.chain().focus().toggleStrike().run()}>
+                <RiStrikethrough size={19}/>
             </StyleButton>
         </div>
 
@@ -65,19 +65,19 @@ const Toolbar: FC<ToolbarProps> = ({ editor }): JSX.Element | null => {
         { /* The row for content types/formats */ }
         <div className='flex-row space-x-3'>
             <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <RiDoubleQuotesL size={18}/>
+                <RiDoubleQuotesL size={19}/>
             </StyleButton>
             <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <FiCode size={18}/>
+                <FiCode size={19}/>
             </StyleButton>
             <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <BiCodeBlock size={18}/>
+                <BiCodeBlock size={19}/>
             </StyleButton>
             <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <BiLinkAlt size={18}/>
+                <BiLinkAlt size={19}/>
             </StyleButton>
             <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <BsListStars size={18}/>
+                <BsListStars size={19}/>
             </StyleButton>
         </div>
 
@@ -86,10 +86,10 @@ const Toolbar: FC<ToolbarProps> = ({ editor }): JSX.Element | null => {
         { /* The row for additional plugins such as Youtube and Image */ }
         <div className='flex-row space-x-3'>
             <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <TbBrandYoutubeKids size={18}/>
+                <TbBrandYoutubeKids size={19}/>
             </StyleButton>
             <StyleButton disabled={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
-                <CgImage size={18}/>
+                <CgImage size={19}/>
             </StyleButton>
         </div>
 
