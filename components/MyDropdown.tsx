@@ -13,7 +13,7 @@ const MyDropdown: FC<MyDropdownProps> = ({ currentOption, options }): JSX.Elemen
         { currentOption }
         {
             isShow && (
-                <ul className="fixed z-10 space-y-3 bg-white rounded-lg py-2 px-3 top-full start-0">
+                <ul className="fixed z-10 space-y-1 bg-white rounded-lg py-2 px-3 top-full start-0">
                     { options.map(({ option, onClick}) => {
                         return (
                             <li key={option} onMouseDown={onClick}>
