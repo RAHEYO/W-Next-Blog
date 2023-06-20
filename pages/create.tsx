@@ -8,6 +8,7 @@ import Link from '@tiptap/extension-link';
 
 import Toolbar from '@/components/Toolbar';
 import Spacebar from '@/components/Spacebar';
+import LinkBubbleMenu from '@/components/LinkBubbleMenu';
 
 type createProps = {
 
@@ -57,6 +58,7 @@ const CreatePage: NextPage<createProps> = () => {
 
         <Spacebar className="h-[100px]" />
 
+        { editor && <LinkBubbleMenu editor={editor} /> }
         <EditorContent  editor={editor} />
     </div>
     );
