@@ -13,13 +13,13 @@ import MyDropdown from './MyDropdown';
 import StyleButton from './StyleButton';
 import Divider from './Divider';
 import LinkingButton from './LinkingButton';
-import { LinkValue } from './LinkForm';
 
 type ToolbarProps = {
-    editor: Editor | null
+    editor: Editor | null,
+    openModal: () => void
 }
 
-const Toolbar: FC<ToolbarProps> = ({ editor }): JSX.Element | null => {
+const Toolbar: FC<ToolbarProps> = ({ editor, openModal }): JSX.Element | null => {
     if (!editor) return null;
     
     const formatOptions = [
@@ -84,7 +84,7 @@ const Toolbar: FC<ToolbarProps> = ({ editor }): JSX.Element | null => {
             <StyleButton active={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
                 <TbBrandYoutubeKids size={19}/>
             </StyleButton>
-            <StyleButton active={false} onClick={() => console.log("MAKE THAT SHIT BOLD!!!")}>
+            <StyleButton active={false} onClick={openModal}>
                 <CgImage size={19}/>
             </StyleButton>
             <LinkingButton editor={editor} />

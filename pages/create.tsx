@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { NextPage } from 'next';
 import { useEditor, EditorContent, getMarkRange, Range } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import Placeholder from '@tiptap/extension-placeholder'
 import Link from '@tiptap/extension-link';
+import TiptapImage from '@tiptap/extension-image';
 
 import Toolbar from '@/components/Toolbar';
 import Spacebar from '@/components/Spacebar';
 import LinkBubbleMenu from '@/components/LinkBubbleMenu';
+import ImageModal from '@/components/ImageModal';
 
 type createProps = {
 
@@ -16,6 +18,10 @@ type createProps = {
 
 const CreatePage: NextPage<createProps> = () => {
     const [textSelectionRange, setTextSelectionRange] = useState<Range>();
+    const [isModalVis, setIsModalVis] = useState<boolean>(false);
+
+    // Function for opening any modal in the creation page
+    const openModal = () => setIsModalVis(true);
 
     // This is the given property from Tiptap to control all the actions of an editor!
     const editor = useEditor({
@@ -29,6 +35,12 @@ const CreatePage: NextPage<createProps> = () => {
                 openOnClick: false,
                 HTMLAttributes: {
                     target: "",
+                },
+            }),
+            TiptapImage.configure({
+                inline: true,
+                HTMLAttributes: {
+                    class: 'mx-auto',
                 },
             })
         ],
@@ -47,19 +59,30 @@ const CreatePage: NextPage<createProps> = () => {
         }
     });
 
+    const insertImages = useCallback((newImgs: string[]) => {
+        for (let img of newImgs) {
+            editor?.chain().focus().setImage({ src: img }).run();
+        }
+
+        setIsModalVis(false);
+    }, [editor]);
+
     // Updating the selection in UI
     useEffect(() => {
+        // Updating the UI for text highlighting everytime we click to highlight
         if (editor && textSelectionRange) editor.commands.setTextSelection(textSelectionRange);
-    }, [editor, textSelectionRange])
+    }, [editor, textSelectionRange]);
 
     return (
     <div className="w-screen h-screen p-10">
-        <Toolbar editor={editor} />
+        <Toolbar editor={editor} openModal={openModal} />
 
         <Spacebar className="h-[100px]" />
 
         { editor && <LinkBubbleMenu editor={editor} /> }
         <EditorContent  editor={editor} />
+
+        <ImageModal visible={isModalVis} onClose={() => setIsModalVis(false)} insertImages={insertImages} />
     </div>
     );
 }
